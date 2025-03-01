@@ -85,7 +85,7 @@ body {
 	max-height: 768px;
 	max-width: 1024px;
 	pointer-events: all;
-	position: relative;
+	position: fixed;
 	top: 0;
 	width: 100vw;
 
@@ -152,7 +152,7 @@ body {
 }
 
 #the_one {
-	height: 50vmin;
+	height: min(50vmin, 250px);
 	left: 50%;
 	opacity: 0;
 	pointer-events: none;
@@ -160,7 +160,7 @@ body {
 	top: 50%;
 	transform: translate(-50%, -50%);
 	transition: opacity 1s;
-	width: 50vmin;
+	width: min(50vmin, 250px);
 
 	.card {
 		height: 100%;
