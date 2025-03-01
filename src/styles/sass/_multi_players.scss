@@ -1,0 +1,84 @@
+.players_2 {
+	#hull {
+		#turnCard {}
+
+		#cardsBoard {}
+
+		.card_zone {}
+
+		.card_zone:nth-child(1) {}
+
+		.card_zone:nth-child(2) {}
+
+		.card {
+			.letter {}
+		}
+	}
+
+	&:not(.single_card_mode) {
+		#hull {
+			#the_one {}
+
+			#turnCard {}
+
+			#cardsBoard {}
+
+			.card_zone {}
+
+			.card_zone:nth-child(1) {}
+
+			.card_zone:nth-child(2) {}
+
+			.card {
+				.letter {}
+			}
+		}
+	}
+
+	&.single_card_mode {
+		#hull {
+			#the_one {
+				.card {}
+			}
+
+			#turnCard {}
+
+			#cardsBoard {}
+
+			.card_zone {}
+
+			.card_zone:nth-child(1) {}
+
+			.card_zone:nth-child(2) {}
+
+			.card {}
+		}
+	}
+}
+
+.players_3 {
+	#hull #cardsBoard {
+		zoom: 1;
+	}
+
+	.player_board {}
+}
+
+.players_4 {
+	#hull #cardsBoard {
+		zoom: 0.9;
+	}
+
+	.player_board {
+		padding: 80px 0 0px;
+	}
+}
+.players_5 {
+	#hull #cardsBoard {
+		zoom: 0.9;
+	}
+
+	.player_board {
+		padding: 80px 0 0px;
+	}
+}

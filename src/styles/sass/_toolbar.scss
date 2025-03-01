@@ -1,0 +1,93 @@
+#toolbar {
+	align-items: stretch;
+	background-color: rgba(#000, 0.6);
+	display: flex;
+	flex-flow: column nowrap;
+	height: 100%;
+	justify-content: center;
+	position: relative;
+	transform: translateX(-100%);
+	transition: transform 0.6s ease-out;
+	width: 20%;
+	z-index: 10000;
+
+	&.open {
+		transform: translateX(0%);
+
+		button#open {
+			&:after {
+				transform: scaleX(-1);
+			}
+		}
+	}
+
+	button#open {
+		align-items: center;
+		background-color: rgba(#000, 0.4);
+		border: 0 none;
+		border-radius: 0rem 3rem 3rem 0rem;
+		display: flex;
+		height: 200px;
+		justify-content: center;
+		padding: 0;
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translate(100%, -50%);
+		width: 30px;
+
+		&:after {
+			border-color: transparent transparent transparent #000;
+			border-style: solid;
+			border-width: 10px 0 10px 18px;
+			content: " ";
+			transition: transform 0.6s ease-out;
+		}
+	}
+
+	button {
+		@include width(100%);
+		@include flexCenter;
+		background-color: #DDD;
+		border-radius: 10px;
+		cursor: pointer;
+		height: 60px;
+		padding: 10px;
+		transition: box-shadow 0.3s, max-width 0.3s, width 0.3s, flex-basis 0.3s, opacity 0.3s;
+
+		&.active {
+			box-shadow: 0 0 8px inset #F80, 0 0 8px inset #F80, 0 0 8px inset #F80, 0 0 8px inset #F80, 0 0 8px inset #F80, 0 0 8px inset #F80;
+		}
+
+		&.hide {
+			max-width:0%;
+			opacity:0;
+		}
+
+		img {
+			height: 100%;
+			max-height: 40px;
+			max-width: 100%;
+			width: 100%;
+			object-fit: contain;
+		}
+	}
+
+	.dash {
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+		max-width: 100%;
+		padding: 10px 10%;
+		width: 100%;
+
+		&.double {
+			button {
+				@include width(48%);
+			}
+		}
+	}
+
+
+	.scores {}
+}

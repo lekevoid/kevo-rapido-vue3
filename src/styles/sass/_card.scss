@@ -1,0 +1,82 @@
+#app {
+	.card {
+		opacity: 0;
+		transition: opacity 1s;
+	}
+
+	&.is_running {
+		.card {
+			opacity: 1;
+		}
+	}
+}
+
+$cardSize: 20vmax;
+
+.card {
+	@include flexCenter;
+	background-color: #FFF;
+	border: #{$cardSize / 14} solid #000;
+	border-radius: 50%;
+	height: $cardSize;
+	padding: #{$cardSize / 20};
+	pointer-events: none;
+	transition: background-color 1s, border-color 1s, opacity 1s;
+	user-select: none;
+	width: $cardSize;
+
+	&.blue {
+		background-color: $lightBlue;
+		border-color: $blue;
+
+		.letter {
+			color: $blue;
+		}
+	}
+
+	&.orange {
+		background-color: $lightOrange;
+		border-color: $orange;
+
+		.letter {
+			color: $orange;
+		}
+	}
+
+	&.green {
+		background-color: $lightGreen;
+		border-color: $green;
+
+		.letter {
+			color: $green;
+		}
+	}
+
+	.icon {
+		@include flexCenter;
+		background-position: center center;
+		background-size: contain;
+		flex: 0 0 60%;
+		height: 100%;
+		max-width: 60%;
+
+		img {
+			display: flex;
+			height: 60%;
+			max-height: 60%;
+			max-width: 100%;
+			width: 100%;
+			object-fit: contain;
+		}
+	}
+
+	.letter {
+		@include flexCenter;
+		flex: 0 0 40%;
+		font-family: "Arial Black", Helvetica, sans-serif;
+		font-size: 8vmax;
+		font-weight: bold;
+		height: 100%;
+		max-width: 40%;
+	}
+}
