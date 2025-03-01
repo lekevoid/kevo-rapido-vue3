@@ -33,7 +33,14 @@ $lightOrange:#F3B16D;
 }
 
 html {
+	background: linear-gradient(to bottom right, #272761 0%, #000 100%);
 	font-size: calc(5px + 0.3vw);
+	height: 100%;
+	left: 0;
+	overflow: hidden;
+	position: fixed;
+	top: 0;
+	width: 100%;
 
 	* {
 		box-sizing: border-box;
@@ -42,11 +49,17 @@ html {
 }
 
 body {
-	background: linear-gradient(to bottom right, darken(#AAD, 50) 0%, darken(#225, 50) 100%);
-	height: 100vh;
+	background: linear-gradient(to bottom right, #272761 0%, #000 100%);
+	height: 100vmin;
+	left: 0;
 	margin: 0;
+	overflow: hidden;
+	-webkit-overflow-scrolling: touch;
 	padding: 0;
-	width: 100vw;
+	position: fixed;
+	top: 0;
+	transform: translate3d(0, 0, 0);
+	width: 100vmax;
 }
 
 #global {
@@ -79,7 +92,7 @@ body {
 	button#new_turn {
 		align-items: center;
 		background-color: transparent;
-		background-image: url("../img/cover.png");
+		background-image: url("img/cover.png");
 		background-position: center center;
 		background-repeat: no-repeat;
 		background-size: contain;

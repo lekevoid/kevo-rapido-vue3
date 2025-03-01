@@ -47,6 +47,7 @@ const scoreChangeDisabled = ref(false);
 const boardIsRotating = ref(false);
 const rotateValue = ref(rotateOrigValue);
 const hideBoard = ref(false);
+const handicapChangeDisabled = ref(false);
 
 const rotate = computed(() => {
 	return {
@@ -61,7 +62,7 @@ function changeScore(val) {
 		} else {
 			confirmScoreChangeState.value = "plus";
 		}
-		score.value.valueChangeDisabled = true;
+		scoreChangeDisabled.value = true;
 
 		score.value += val;
 		setTimeout(() => {
@@ -72,7 +73,7 @@ function changeScore(val) {
 
 function resetConfirmState() {
 	confirmScoreChangeState.value = "";
-	score.value.valueChangeDisabled = false;
+	scoreChangeDisabled.value = false;
 	handicapChangeDisabled.value = false;
 }
 

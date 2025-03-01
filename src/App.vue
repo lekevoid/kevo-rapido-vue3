@@ -85,8 +85,6 @@ import { ref, computed, watch } from "vue";
 import Card from "./components/Card.vue";
 import PlayerBoard from "./components/PlayerBoard.vue";
 
-import "./styles/styles.css";
-
 import icon_add_player from "./img/icon_add_player.svg";
 import icon_remove_player from "./img/icon_remove_player.svg";
 import icon_scores from "./img/icon_scores.svg";
@@ -295,7 +293,11 @@ watch(turn, (newVal) => {
 });
 </script>
 
-<style scoped>
+<style lang="scss">
+@use "styles/styles.scss";
+</style>
+
+<style scoped lang="scss">
 header {
 	line-height: 1.5;
 }

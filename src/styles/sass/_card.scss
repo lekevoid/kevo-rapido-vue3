@@ -12,14 +12,23 @@
 }
 
 $cardSize: 20vmax;
+$blue:#2057A3;
+$lightBlue:#90B4DD;
+$green:#5AA320;
+$lightGreen:#BBDF7E;
+$orange:#F26B15;
+$lightOrange:#F3B16D;
 
 .card {
-	@include flexCenter;
+	align-items: center;
 	background-color: #FFF;
-	border: #{$cardSize / 14} solid #000;
+	border: calc($cardSize / 14) solid #000;
 	border-radius: 50%;
+	display: flex;
+	flex-flow: row nowrap;
 	height: $cardSize;
-	padding: #{$cardSize / 20};
+	justify-content: center;
+	padding: calc($cardSize / 20);
 	pointer-events: none;
 	transition: background-color 1s, border-color 1s, opacity 1s;
 	user-select: none;
@@ -53,11 +62,14 @@ $cardSize: 20vmax;
 	}
 
 	.icon {
-		@include flexCenter;
+		align-items: center;
 		background-position: center center;
 		background-size: contain;
+		display: flex;
 		flex: 0 0 60%;
+		flex-flow: row nowrap;
 		height: 100%;
+		justify-content: center;
 		max-width: 60%;
 
 		img {
@@ -65,18 +77,21 @@ $cardSize: 20vmax;
 			height: 60%;
 			max-height: 60%;
 			max-width: 100%;
-			width: 100%;
 			object-fit: contain;
+			width: 100%;
 		}
 	}
 
 	.letter {
-		@include flexCenter;
+		align-items: center;
+		display: flex;
 		flex: 0 0 40%;
+		flex-flow: row nowrap;
 		font-family: "Arial Black", Helvetica, sans-serif;
 		font-size: 8vmax;
 		font-weight: bold;
 		height: 100%;
+		justify-content: center;
 		max-width: 40%;
 	}
 }

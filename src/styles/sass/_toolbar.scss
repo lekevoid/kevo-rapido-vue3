@@ -46,30 +46,35 @@
 	}
 
 	button {
-		@include width(100%);
-		@include flexCenter;
+		align-items: center;
 		background-color: #DDD;
 		border-radius: 10px;
 		cursor: pointer;
+		display: flex;
+		flex: 0 0 100%;
+		flex-flow: row nowrap;
 		height: 60px;
+		justify-content: center;
+		max-width: 100%;
 		padding: 10px;
 		transition: box-shadow 0.3s, max-width 0.3s, width 0.3s, flex-basis 0.3s, opacity 0.3s;
+		width: 100%;
 
 		&.active {
 			box-shadow: 0 0 8px inset #F80, 0 0 8px inset #F80, 0 0 8px inset #F80, 0 0 8px inset #F80, 0 0 8px inset #F80, 0 0 8px inset #F80;
 		}
 
 		&.hide {
-			max-width:0%;
-			opacity:0;
+			max-width: 0%;
+			opacity: 0;
 		}
 
 		img {
 			height: 100%;
 			max-height: 40px;
 			max-width: 100%;
-			width: 100%;
 			object-fit: contain;
+			width: 100%;
 		}
 	}
 
@@ -83,7 +88,8 @@
 
 		&.double {
 			button {
-				@include width(48%);
+				flex: 0 0 48%;
+				width: 48%;
 			}
 		}
 	}
