@@ -1,0 +1,138 @@
+<template>
+	<div :class="['Card', color]">
+		<div class="back">
+			<img :src="`/img/back.png`" alt="" />
+		</div>
+		<div class="front">
+			<img class="icon" :src="`/img/${icon}_${color}.png`" alt="" />
+			<div class="letter">
+				{{ letter }}
+			</div>
+		</div>
+	</div>
+</template>
+
+<script setup>
+const { card } = defineProps({
+	card: { type: Object, required: true },
+});
+
+const { color, icon, letter } = card;
+</script>
+
+<style lang="scss" scoped>
+@keyframes flipCard {
+	0% {
+		left: -12%;
+		transform: translateX(-50%) translateY(-50%) rotate3d(0, 1, 0, 180deg) scale(0.4);
+		perspective: 600px;
+		transform-style: preserve-3d;
+	}
+
+	50% {
+		left: 0%;
+		transform: translateX(-0%) translateY(-50%) translateZ(300px) rotate3d(-2, 1, 0, -180deg);
+	}
+
+	100% {
+		left: 50%;
+		perspective: 600px;
+		transform-style: preserve-3d;
+		transform: translateX(-50%) translateY(-50%) translateZ(10px) rotate3d(0, 0, 0, 0deg);
+	}
+}
+
+.Card {
+	--card-size: min(60vmin, 400px);
+	height: 1em;
+	width: 1em;
+	border-radius: 1000px;
+	font-size: var(--card-size);
+	transform-style: preserve-3d;
+	perspective: 600px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	color: var(--color);
+	transform: translate(-50%, -50%);
+	z-index: 1;
+	transform-origin: center center;
+
+	&.blue {
+		--color: #2057a3;
+		--light-color: #90b4dd;
+	}
+
+	&.green {
+		--color: #5aa320;
+		--light-color: #bbdf7e;
+	}
+
+	&.orange {
+		--color: #f26b15;
+		--light-color: #f3b16d;
+	}
+
+	&.upcoming_card {
+		z-index: 10;
+		animation: flipCard 1s ease 0s 1 forwards;
+	}
+}
+
+.front {
+	border: 20px solid var(--color);
+	border-radius: 1000px;
+	height: 100%;
+	background-color: var(--light-color);
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	left: 0;
+	padding: 0.1em;
+	top: 0;
+}
+
+.icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 50%;
+	max-width: 50%;
+	/* border: 1px solid purple; */
+	aspect-ratio: 1;
+	object-fit: contain;
+	object-position: center;
+}
+
+.letter {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 50%;
+	flex: 0 0 50%;
+	font-size: 0.3em;
+	font-family: arial black, arial;
+	fonmt-weigth: 900;
+	/* border: 1px solid purple; */
+	aspect-ratio: 1;
+}
+
+.back {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	transform: translateZ(-1px) rotate3d(0, 1, 0, 180deg);
+
+	img {
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+}
+</style>
