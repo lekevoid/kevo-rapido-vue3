@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/fonts": "^0.10.3",
     "@pinia/nuxt": "^0.10.1",
     "@vite-pwa/nuxt": "^0.10.6",
     "@vueuse/nuxt": "^12.7.0",

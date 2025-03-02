@@ -31,24 +31,22 @@ const { color, icon, letter, rotate } = card;
 
 	30% {
 		left: 0%;
-		transform: translateX(-0%) translateY(-50%) translateZ(200px) rotate3d(-2, 1, 0, -180deg);
+		transform: translateX(-0%) translateY(-50%) translateZ(200px) rotate3d(-2, 1, 0, -180deg) scale(1);
 	}
 
 	70% {
 		left: 25%;
-		transform: translateX(-50%) translateY(-50%) translateZ(60px) rotate3d(-2, 1, 0, -0deg);
+		transform: translateX(-50%) translateY(-50%) translateZ(60px) rotate3d(-2, 1, 0, -0deg) scale(1);
 	}
 
 	100% {
 		left: 50%;
-		perspective: 600px;
-		transform-style: preserve-3d;
-		transform: translateX(-50%) translateY(-50%) translateZ(1px) rotate3d(0, 0, 0, 0deg);
+		transform: translateX(-50%) translateY(-50%) translateZ(1px) rotate3d(0, 0, 0, 0deg) scale(1);
 	}
 }
 
 .Card {
-	--card-size: min(60vmin, 400px);
+	--card-size: min(60vmin, 350px);
 	height: 1em;
 	width: 1em;
 	border-radius: 1000px;
@@ -119,8 +117,7 @@ const { color, icon, letter, rotate } = card;
 	flex: 0 0 40%;
 	padding-left: 10%;
 	font-size: 0.25em;
-	font-family: arial black, arial;
-	fonmt-weigth: 900;
+	font-weight: 900;
 	/* border: 1px solid purple; */
 	aspect-ratio: 1;
 }

@@ -117,7 +117,7 @@ body {
 	pointer-events: none;
 	margin: 0;
 	padding: 0;
-	font-family: arial;
+	font-family: Roboto;
 }
 
 div {
