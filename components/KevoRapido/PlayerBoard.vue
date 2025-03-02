@@ -19,8 +19,13 @@ const editMode = ref(false);
 	height: 50vmin;
 	width: 100px;
 	display: flex;
+	flex-flow: column nowrap;
 	align-items: center;
 	justify-content: flex-end;
-	transform: rotate(var(--rotate));
+	transform: translateX(-50%) rotate(var(--rotate));
+	z-index: 1;
+}
+pre {
+	margin: 0;
 }
 </style>

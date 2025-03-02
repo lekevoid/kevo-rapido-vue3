@@ -21,11 +21,44 @@ import { usePlayersStore } from "~/stores/kevo-rapido/players";
 
 const { players } = storeToRefs(usePlayersStore());
 
-console.log(players.value);
-
 const newCardBtnEnabled = ref(true);
 const currentCard = ref({});
 const upcomingCard = ref({});
+
+const lettersMR =
+	"AAAAAAAAAABBBBBBBBCCCCCCCDDDDDDDDEEEEEEEFFFFFFFFGGGGGHHHHHHHIIIIIJJJJJJJKKKKKLLLLLLLLLMMMMMMMMMMNNNNNNNNNNOOOOOOPPPPPPPPQQQRRRRRRRRRRSSSSSSSSSSTTTTTTTTTTTTUUUUVVVVVWWWWWWXXXYYYYZZZ";
+const lettersScrabbleFR = "AAAAAAAAABBCCDDDEEEEEEEEEEEEEEEFFGGHHIIIIIIIIJKLLLLLMMMNNNNNNOOOOOOPPQRRRRRRSSSSSSTTTTTTUUUUUUVVWXYZ";
+const lettersScrabbleEN = "AAAAAAAAABBCCDDDDEEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOPPQRRRRRRSSSSTTTTTTUUUUVVWWXYYZ";
+const lettersCities =
+	"AAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDEEEEEEEFFFFFFFFGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHHHIIIIIIIIIIJJJJJJJJJJJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNNNOOOOOOOOOPPPPPPPPPPPPPPPPPPPPPPPQQQQRRRRRRRRRRRRRSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTTTTTTTTUUUUUVVVVVVVVVWWWWWWXXXYYYYYYYZZZZZZ";
+const lettersCountries =
+	"AAAAAAAAAAABBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCDDDDDEEEEEEEEFFFGGGGGGGGGGGHHHHIIIIIIIIJJJKKKKKLLLLLLLLLMMMMMMMMMMMMMMMMMMNNNNNNNNNNNOPPPPPPPPPPQRRRSSSSSSSSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTUUUUUUUVVVYZZ";
+
+const colors = ["blue", "green", "orange"];
+
+const icons = [
+	"animal",
+	"city",
+	"country",
+	"celebrity",
+	"profession",
+	"object",
+	"plant",
+	"food",
+	"name",
+	"movie",
+	"book",
+	"brand",
+	"event",
+	"fictional_character",
+	"game",
+	"houseware",
+	"location",
+	"mythology",
+	"adjective",
+	"song",
+	"verb",
+];
 
 function newCard() {
 	if (!newCardBtnEnabled.value) return;
@@ -33,9 +66,10 @@ function newCard() {
 	newCardBtnEnabled.value = false;
 
 	upcomingCard.value = {
-		color: "blue",
-		icon: "animal",
-		letter: "A",
+		color: colors[Math.floor(Math.random() * colors.length)],
+		icon: icons[Math.floor(Math.random() * icons.length)],
+		letter: lettersMR[Math.floor(Math.random() * lettersMR.length)],
+		rotate: Math.round(Math.random() * 360),
 	};
 }
 
@@ -44,9 +78,13 @@ watch(upcomingCard, (unfoldingCard) => {
 
 	setTimeout(() => {
 		currentCard.value = unfoldingCard;
-		// upcomingCard.value = {};
+		upcomingCard.value = {};
 		newCardBtnEnabled.value = true;
-	}, 2000);
+	}, 1200);
+});
+
+watch(currentCard, (newVal) => {
+	console.log(newVal);
 });
 </script>
 

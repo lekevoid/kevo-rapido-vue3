@@ -3,7 +3,7 @@
 		<div class="back">
 			<img :src="`/img/back.png`" alt="" />
 		</div>
-		<div class="front">
+		<div class="front" :style="`--random-rotate:${rotate}deg;`">
 			<img class="icon" :src="`/img/${icon}_${color}.png`" alt="" />
 			<div class="letter">
 				{{ letter }}
@@ -17,7 +17,7 @@ const { card } = defineProps({
 	card: { type: Object, required: true },
 });
 
-const { color, icon, letter } = card;
+const { color, icon, letter, rotate } = card;
 </script>
 
 <style lang="scss" scoped>
@@ -60,7 +60,7 @@ const { color, icon, letter } = card;
 	top: 50%;
 	color: var(--color);
 	transform: translate(-50%, -50%);
-	z-index: 1;
+	z-index: 10;
 	transform-origin: center center;
 
 	&.blue {
@@ -79,7 +79,7 @@ const { color, icon, letter } = card;
 	}
 
 	&.upcoming_card {
-		z-index: 10;
+		z-index: 20;
 		animation: flipCard 1.2s ease 0s 1 forwards;
 	}
 }
@@ -97,6 +97,7 @@ const { color, icon, letter } = card;
 	left: 0;
 	padding: 0.1em;
 	top: 0;
+	transform: rotate(var(--random-rotate));
 }
 
 .icon {
