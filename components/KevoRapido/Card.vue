@@ -29,16 +29,21 @@ const { color, icon, letter } = card;
 		transform-style: preserve-3d;
 	}
 
-	50% {
+	30% {
 		left: 0%;
-		transform: translateX(-0%) translateY(-50%) translateZ(300px) rotate3d(-2, 1, 0, -180deg);
+		transform: translateX(-0%) translateY(-50%) translateZ(200px) rotate3d(-2, 1, 0, -180deg);
+	}
+
+	80% {
+		left: 42%;
+		transform: translateX(-30%) translateY(-50%) translateZ(80px) rotate3d(-2, 1, 0, -20deg);
 	}
 
 	100% {
 		left: 50%;
 		perspective: 600px;
 		transform-style: preserve-3d;
-		transform: translateX(-50%) translateY(-50%) translateZ(10px) rotate3d(0, 0, 0, 0deg);
+		transform: translateX(-50%) translateY(-50%) translateZ(1px) rotate3d(0, 0, 0, 0deg);
 	}
 }
 
@@ -75,7 +80,7 @@ const { color, icon, letter } = card;
 
 	&.upcoming_card {
 		z-index: 10;
-		animation: flipCard 1s ease 0s 1 forwards;
+		animation: flipCard 1.2s ease 0s 1 forwards;
 	}
 }
 

@@ -8,12 +8,21 @@
 			<div class="zone_flipped_up">
 				<KevoRapidoCard v-if="upcomingCard?.letter" class="upcoming_card" :card="upcomingCard" />
 				<KevoRapidoCard v-if="currentCard?.letter" class="current_card" :card="currentCard" />
+				<KevoRapidoPlayerBoard v-for="(player, k) in players" :player="player" :key="k" />
 			</div>
 		</div>
 	</div>
 </template>
 
 <script setup>
+import { storeToRefs } from "pinia";
+
+import { usePlayersStore } from "~/stores/kevo-rapido/players";
+
+const { players } = storeToRefs(usePlayersStore());
+
+console.log(players.value);
+
 const newCardBtnEnabled = ref(true);
 const currentCard = ref({});
 const upcomingCard = ref({});
@@ -35,7 +44,7 @@ watch(upcomingCard, (unfoldingCard) => {
 
 	setTimeout(() => {
 		currentCard.value = unfoldingCard;
-		upcomingCard.value = {};
+		// upcomingCard.value = {};
 		newCardBtnEnabled.value = true;
 	}, 2000);
 });
