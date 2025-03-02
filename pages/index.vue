@@ -111,10 +111,15 @@ watch(upcomingCard, (unfoldingCard) => {
 <style lang="scss">
 html {
 	pointer-events: none;
+	overscroll-behavior: none;
+	overflow: hidden;
 }
 
 body {
 	pointer-events: none;
+	overscroll-behavior: none;
+	-webkit-overflow-scrolling: touch;
+	overflow: hidden;
 	margin: 0;
 	padding: 0;
 	font-family: Roboto;
