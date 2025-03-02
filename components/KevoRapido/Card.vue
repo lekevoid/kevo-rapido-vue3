@@ -35,7 +35,7 @@ const { color, icon, letter, rotate } = card;
 	}
 
 	80% {
-		left: 42%;
+		left: 38%;
 		transform: translateX(-30%) translateY(-50%) translateZ(60px) rotate3d(-2, 1, 0, -0deg);
 	}
 
