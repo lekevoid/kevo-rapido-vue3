@@ -6,6 +6,11 @@
 <script setup></script>
 
 <style lang="scss">
+* {
+	position: relative;
+	box-sizing: border-box;
+}
+
 html {
 	overscroll-behavior: none;
 	overflow: hidden;
@@ -23,8 +28,12 @@ div {
 	display: block;
 }
 
-* {
-	position: relative;
-	box-sizing: border-box;
+input,
+textarea,
+button,
+select,
+a {
+	outline: none;
+	-webkit-tap-highlight-color: transparent;
 }
 </style>
