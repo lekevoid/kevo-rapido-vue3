@@ -29,12 +29,12 @@ const { color, icon, letter, rotate } = card;
 		transform-style: preserve-3d;
 	}
 
-	30% {
+	60% {
 		left: 0%;
 		transform: translateX(-0%) translateY(-50%) translateZ(200px) rotate3d(-2, 1, 0, -180deg) scale(1);
 	}
 
-	70% {
+	90% {
 		left: 25%;
 		transform: translateX(-50%) translateY(-50%) translateZ(60px) rotate3d(-2, 1, 0, -0deg) scale(1);
 	}

@@ -1,21 +1,30 @@
 <template>
 	<div :class="['toolbar', { open }]">
-		<div class="players">
-			<img :src="icon_players" alt="" />
-			<button class="btn_positive" @click="addPlayer" :disabled="players.length >= 8">+</button>
-		</div>
-		<div class="players_rotates">
-			<h2>Players' positions</h2>
-			<input v-for="player in players" type="range" min="0" max="360" step="2" v-model="player.rotateBoard" />
-		</div>
-		<div class="choose_categories">
-			<button
-				:class="[enabledCategories.includes(category) ? 'enabled' : 'disabled']"
-				v-for="category in allCategories"
-				@click="toggleCategory(category)"
-				:key="category">
-				<img :src="`/img/${category}_blue.png`" />
-			</button>
+		<div class="scroll">
+			<div class="players">
+				<img :src="icon_players" alt="" />
+				<button :class="['btn_positive', { disabled: players.length >= 8 }]" :disabled="players.length >= 8" @click="addPlayer">+</button>
+				<button :class="['btn_negative', { disabled: players.length <= 2 }]" :disabled="players.length <= 2" @click="removeLastPlayer">&minus;</button>
+			</div>
+			<div class="players_rotates">
+				<h2>Players' positions</h2>
+				<input v-for="player in players" type="range" min="0" max="360" step="2" v-model="player.rotateBoard" />
+			</div>
+			<div class="choose_categories">
+				<div class="row">
+					<button class="multiple_categories" @click="toggleCategories('all')">All</button>
+					<button class="multiple_categories" @click="toggleCategories('original')">Original</button>
+					<button class="multiple_categories" @click="toggleCategories('kev')">Kev</button>
+					<button class="multiple_categories" @click="toggleCategories('twist')">Twist</button>
+				</div>
+				<button
+					v-for="category in allCategories"
+					:class="['single_category', enabledCategories.includes(category) ? 'enabled' : 'disabled']"
+					@click="toggleCategory(category)"
+					:key="category">
+					<img :src="`/img/${category}_blue.png`" />
+				</button>
+			</div>
 		</div>
 		<div class="open_btn" @click="open = !open">
 			<span class="arrow"></span>
@@ -32,18 +41,9 @@ import { usePlayersStore } from "~/stores/kevo-rapido/players";
 import icon_players from "~/img/icon_players.png";
 
 const { players } = storeToRefs(usePlayersStore());
-const { addPlayer } = usePlayersStore();
-const { allCategories } = useGameStore();
+const { addPlayer, removeLastPlayer } = usePlayersStore();
+const { allCategories, toggleCategory, toggleCategories } = useGameStore();
 const { enabledCategories } = storeToRefs(useGameStore());
-
-function toggleCategory(c) {
-	const index = enabledCategories.value.indexOf(c);
-	if (index > -1) {
-		enabledCategories.value.splice(index, 1);
-	} else {
-		enabledCategories.value.push(c);
-	}
-}
 
 const open = ref(false);
 </script>
@@ -53,7 +53,6 @@ const open = ref(false);
 	z-index: 10;
 	width: 40%;
 	background: linear-gradient(to bottom, rgba(#002, 0.6) 0%, rgba(#002, 1) 100%);
-	padding: 10px;
 	top: 0;
 	left: 0;
 	color: #fff;
@@ -61,6 +60,13 @@ const open = ref(false);
 	height: 100%;
 	transform: translateX(-100%);
 	transition: transform 0.6s ease;
+	padding: 0;
+
+	.scroll {
+		overflow-y: auto;
+		padding: 30px 20px;
+		height: 100vh;
+	}
 
 	.arrow {
 		border-width: 5px 0 5px 10px;
@@ -97,7 +103,7 @@ const open = ref(false);
 	margin-bottom: 20px;
 
 	input {
-		margin: 8px 0;
+		margin: 16px 0;
 		width: 100%;
 	}
 }
@@ -107,12 +113,19 @@ const open = ref(false);
 	gap: 10px;
 	flex-flow: row wrap;
 
+	.row {
+		display: flex;
+		gap: 10px;
+		flex-flow: row nowrap;
+		justify-content: space-between;
+		flex: 0 0 100%;
+	}
+
 	button {
 		appearance: none;
 		height: 36px;
 		padding: 1.2%;
 		border: 0 none;
-		width: 10%;
 		border-radius: 8px;
 		transition: background-color 0.3s, box-shadow 0.3s;
 
@@ -121,6 +134,19 @@ const open = ref(false);
 			max-height: 100%;
 			object-fit: contain;
 			transition: filter 0.3s;
+		}
+
+		&.multiple_categories {
+			flex: 1 1 auto;
+			margin-bottom: 10px;
+			background-color: #f6f;
+			box-shadow: inset 0px 0px 4px #404, inset 0px 0px 8px #404;
+			color: #202;
+			font-size: 12px;
+		}
+
+		&.single_category {
+			width: 10%;
 		}
 
 		&.enabled {
@@ -151,19 +177,46 @@ h2 {
 }
 
 button {
+	appearance: none;
+
 	&.btn_positive {
 		background-color: #0d0;
-		appearance: none;
 		width: 40px;
 		height: 40px;
 		border: 0 none;
 		border-radius: 8px;
 		font-size: 30px;
+		margin: 0 8px;
 		font-weight: 900;
 		padding: 0;
 		line-height: 0.8;
 		box-shadow: inset 0px 0px 4px #040, inset 0px 0px 8px #040;
+		transition: opacity 0.3s;
 		color: #030;
+
+		&.disabled {
+			opacity: 0.2;
+		}
+	}
+
+	&.btn_negative {
+		background-color: #d00;
+		width: 40px;
+		height: 40px;
+		border: 0 none;
+		border-radius: 8px;
+		font-size: 30px;
+		margin: 0 8px;
+		font-weight: 900;
+		padding: 0;
+		line-height: 0.8;
+		box-shadow: inset 0px 0px 4px #400, inset 0px 0px 8px #400;
+		transition: opacity 0.3s;
+		color: #300;
+
+		&.disabled {
+			opacity: 0.2;
+		}
 	}
 }
 

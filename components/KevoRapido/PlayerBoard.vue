@@ -7,7 +7,7 @@
 		</div>
 		<div v-else class="edit_player">
 			<button class="cancel" @click="editMode = false">Cancel</button>
-			<button class="delete" @click="removePlayer(playerId)">Remove</button>
+			<button v-if="players.length > 2" class="delete" @click="removePlayer(playerId)">Remove</button>
 		</div>
 	</div>
 </template>
@@ -102,6 +102,7 @@ onLongPress(playerBoardRef, handleOnLongPress, {
 		border-radius: 4px;
 		height: 30px;
 		font-size: 12px;
+		margin: 0 auto;
 
 		&.cancel {
 			background-color: #aa0;

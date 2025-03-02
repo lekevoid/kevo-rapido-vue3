@@ -78,13 +78,18 @@ export const usePlayersStore = defineStore("players", () => {
 	}
 
 	function removePlayer(playerId) {
-		console.log(playerId);
 		players.value = players.value.filter((p) => p.id !== playerId);
+	}
+
+	function removeLastPlayer() {
+		console.log(players.value);
+		players.value.pop();
 	}
 
 	return {
 		players,
 		addPlayer,
 		removePlayer,
+		removeLastPlayer,
 	};
 });
