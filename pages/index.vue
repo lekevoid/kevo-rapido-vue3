@@ -134,11 +134,12 @@ div {
 #kevo_rapido,
 .board {
 	pointer-events: all;
-	width: 100%;
-	height: 100%;
+	width: 100vw;
+	height: 100vh;
 	position: fixed;
-	top: 0;
-	left: 0;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	background: linear-gradient(to right bottom, #adf 0%, #88f 100%);
 }
 
@@ -168,5 +169,18 @@ div {
 	perspective: 800px;
 	perspective-origin: 50% 50%;
 	transform-style: preserve-3d;
+}
+
+@media (orientation: portrait) {
+	#kevo_rapido {
+		width: 100vh;
+		height: 100vw;
+		transform: translate(-50%, -50%) rotate(90deg);
+	}
+
+	.board {
+		width: 100vh;
+		height: 100vw;
+	}
 }
 </style>
