@@ -36,7 +36,7 @@ const { color, icon, letter, rotate } = card;
 
 	80% {
 		left: 42%;
-		transform: translateX(-30%) translateY(-50%) translateZ(80px) rotate3d(-2, 1, 0, -20deg);
+		transform: translateX(-30%) translateY(-50%) translateZ(60px) rotate3d(-2, 1, 0, -0deg);
 	}
 
 	100% {
@@ -80,7 +80,7 @@ const { color, icon, letter, rotate } = card;
 
 	&.upcoming_card {
 		z-index: 20;
-		animation: flipCard 1.2s ease 0s 1 forwards;
+		animation: flipCard 1s ease 0s 1 forwards;
 	}
 }
 
