@@ -9,8 +9,7 @@
 			<input v-for="player in players" type="range" min="0" max="360" step="5" v-model="player.rotateBoard" />
 		</div>
 		<div class="open_btn" @click="open = !open">
-			<span v-if="open"><</span>
-			<span v-else>></span>
+			<span class="arrow"></span>
 		</div>
 	</div>
 </template>
@@ -40,8 +39,20 @@ const open = ref(false);
 	transform: translateX(-100%);
 	transition: transform 0.6s ease;
 
+	.arrow {
+		border-width: 5px 0 5px 10px;
+		border-color: transparent transparent transparent rgba(#fff, 0.6);
+		height: 0px;
+		border-style: solid;
+		width: 0px;
+		display: block;
+	}
+
 	&.open {
 		transform: translateX(0%);
+		.arrow {
+			transform: rotate(180deg);
+		}
 	}
 }
 

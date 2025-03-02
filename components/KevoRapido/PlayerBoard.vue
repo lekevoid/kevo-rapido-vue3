@@ -69,12 +69,14 @@ onLongPress(playerBoardRef, handleOnLongPress, {
 
 	.score {
 		font-size: 30px;
+		color: #000;
 		font-weight: 900;
 	}
 
 	button {
 		appearance: none;
 		font-weight: 900;
+		color: #000;
 		font-size: 40px;
 		background: rgba(#ddf, 0.01);
 		border: 0 none;
