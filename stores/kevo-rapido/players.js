@@ -6,6 +6,11 @@ export const usePlayersStore = defineStore("players", () => {
 		rotateBoard: 0,
 	};
 
+	function playerId() {
+		const now = Date.now();
+		return Math.round(Math.random() * parseInt(now));
+	}
+
 	function deepClone(obj) {
 		if (typeof obj !== "object" || obj === null) {
 			return obj;
@@ -55,10 +60,12 @@ export const usePlayersStore = defineStore("players", () => {
 		{
 			...blankPlayer,
 			rotateBoard: 0,
+			id: playerId(),
 		},
 		{
 			...blankPlayer,
 			rotateBoard: 180,
+			id: playerId(),
 		},
 	]);
 
@@ -66,7 +73,7 @@ export const usePlayersStore = defineStore("players", () => {
 		if (players.value.length >= 8) return;
 		const farthestEmptyPosition = findFarthestEmptyPosition();
 		let playerToAdd = deepClone(blankPlayer);
-		players.value.push({ ...playerToAdd, rotateBoard: farthestEmptyPosition });
+		players.value.push({ ...playerToAdd, rotateBoard: farthestEmptyPosition, id: playerId() });
 		console.log(players.value);
 	}
 

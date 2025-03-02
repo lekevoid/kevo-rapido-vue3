@@ -8,7 +8,7 @@
 			<div class="zone_flipped_up">
 				<KevoRapidoCard v-if="upcomingCard?.letter" class="upcoming_card" :card="upcomingCard" :key="upcomingCard.id" />
 				<KevoRapidoCard v-if="currentCard?.letter" class="current_card" :card="currentCard" :key="currentCard.id" />
-				<KevoRapidoPlayerBoard v-for="(player, k) in players" :player="player" :key="k" />
+				<KevoRapidoPlayerBoard v-for="player in players" :player-id="player.id" :key="player.id" />
 			</div>
 		</div>
 	</div>
@@ -25,10 +25,8 @@ const newCardBtnEnabled = ref(true);
 const currentCard = ref({});
 const upcomingCard = ref({});
 
-const lettersMR =
+const lettersBase =
 	"AAAAAAAAAABBBBBBBBCCCCCCCDDDDDDDDEEEEEEEFFFFFFFFGGGGGHHHHHHHIIIIIJJJJJJJKKKKKLLLLLLLLLMMMMMMMMMMNNNNNNNNNNOOOOOOPPPPPPPPQQQRRRRRRRRRRSSSSSSSSSSTTTTTTTTTTTTUUUUVVVVVWWWWWWXXXYYYYZZZ";
-const lettersScrabbleFR = "AAAAAAAAABBCCDDDEEEEEEEEEEEEEEEFFGGHHIIIIIIIIJKLLLLLMMMNNNNNNOOOOOOPPQRRRRRRSSSSSSTTTTTTUUUUUUVVWXYZ";
-const lettersScrabbleEN = "AAAAAAAAABBCCDDDDEEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOPPQRRRRRRSSSSTTTTTTUUUUVVWWXYYZ";
 const lettersCities =
 	"AAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDEEEEEEEFFFFFFFFGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHHHIIIIIIIIIIJJJJJJJJJJJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNNNOOOOOOOOOPPPPPPPPPPPPPPPPPPPPPPPQQQQRRRRRRRRRRRRRSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTTTTTTTTUUUUUVVVVVVVVVWWWWWWXXXYYYYYYYZZZZZZ";
 const lettersCountries =
@@ -65,10 +63,22 @@ function newCard() {
 
 	newCardBtnEnabled.value = false;
 
+	// Choose color
+	const color = colors[Math.floor(Math.random() * colors.length)];
+
+	// Choose category
+	const icon = icons[Math.floor(Math.random() * icons.length)];
+
+	// Choose letter
+	let compendium = lettersBase;
+	if (icon === "country") compendium = lettersCountries;
+	if (icon === "city") compendium = lettersCities;
+	const letter = compendium[Math.floor(Math.random() * compendium.length)];
+
 	const card = {
-		color: colors[Math.floor(Math.random() * colors.length)],
-		icon: icons[Math.floor(Math.random() * icons.length)],
-		letter: lettersMR[Math.floor(Math.random() * lettersMR.length)],
+		color,
+		icon,
+		letter,
 		rotate: Math.round(Math.random() * 360),
 	};
 
@@ -99,6 +109,7 @@ html {
 body {
 	margin: 0;
 	padding: 0;
+	font-family: arial;
 }
 
 div {
