@@ -66,9 +66,11 @@ onLongPress(playerBoardRef, handleOnLongPress, {
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	align-items: center;
+	user-select: none;
 
 	.score {
 		font-size: 30px;
+		user-select: none;
 		color: #000;
 		font-weight: 900;
 	}
@@ -76,6 +78,7 @@ onLongPress(playerBoardRef, handleOnLongPress, {
 	button {
 		appearance: none;
 		font-weight: 900;
+		user-select: none;
 		color: #000;
 		font-size: 40px;
 		background: rgba(#ddf, 0.01);
