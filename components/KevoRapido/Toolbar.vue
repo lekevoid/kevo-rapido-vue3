@@ -112,7 +112,7 @@ const open = ref(false);
 }
 
 .players_rotates {
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 
 	input {
 		margin: 16px 0;
