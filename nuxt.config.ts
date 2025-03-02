@@ -31,6 +31,11 @@ export default defineNuxtConfig({
 					type: "image/png",
 				},
 				{
+					src: "icons/apple-touch-icon.png",
+					sizes: "180x180",
+					type: "image/png",
+				},
+				{
 					src: "icons/android-chrome-512x512.png",
 					sizes: "512x512",
 					type: "image/png",
