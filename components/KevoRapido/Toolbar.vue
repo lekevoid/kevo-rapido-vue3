@@ -8,6 +8,15 @@
 			<h2>Players' positions</h2>
 			<input v-for="player in players" type="range" min="0" max="360" step="2" v-model="player.rotateBoard" />
 		</div>
+		<div class="choose_categories">
+			<button
+				:class="[enabledCategories.includes(category) ? 'enabled' : 'disabled']"
+				v-for="category in allCategories"
+				@click="toggleCategory(category)"
+				:key="category">
+				<img :src="`/img/${category}_blue.png`" />
+			</button>
+		</div>
 		<div class="open_btn" @click="open = !open">
 			<span class="arrow"></span>
 		</div>
@@ -15,12 +24,26 @@
 </template>
 
 <script setup>
+import { storeToRefs } from "pinia";
+
+import { useGameStore } from "~/stores/kevo-rapido/game";
 import { usePlayersStore } from "~/stores/kevo-rapido/players";
 
 import icon_players from "~/img/icon_players.png";
 
 const { players } = storeToRefs(usePlayersStore());
 const { addPlayer } = usePlayersStore();
+const { allCategories } = useGameStore();
+const { enabledCategories } = storeToRefs(useGameStore());
+
+function toggleCategory(c) {
+	const index = enabledCategories.value.indexOf(c);
+	if (index > -1) {
+		enabledCategories.value.splice(index, 1);
+	} else {
+		enabledCategories.value.push(c);
+	}
+}
 
 const open = ref(false);
 </script>
@@ -28,7 +51,7 @@ const open = ref(false);
 <style lang="scss" scoped>
 .toolbar {
 	z-index: 10;
-	width: 30%;
+	width: 40%;
 	background: linear-gradient(to bottom, rgba(#002, 0.6) 0%, rgba(#002, 1) 100%);
 	padding: 10px;
 	top: 0;
@@ -50,6 +73,7 @@ const open = ref(false);
 
 	&.open {
 		transform: translateX(0%);
+
 		.arrow {
 			transform: rotate(180deg);
 		}
@@ -73,8 +97,51 @@ const open = ref(false);
 	margin-bottom: 20px;
 
 	input {
-		margin: 20px 0;
+		margin: 8px 0;
 		width: 100%;
+	}
+}
+
+.choose_categories {
+	display: flex;
+	gap: 10px;
+	flex-flow: row wrap;
+
+	button {
+		appearance: none;
+		height: 36px;
+		padding: 1.2%;
+		border: 0 none;
+		width: 10%;
+		border-radius: 8px;
+		transition: background-color 0.3s, box-shadow 0.3s;
+
+		img {
+			max-width: 100%;
+			max-height: 100%;
+			object-fit: contain;
+			transition: filter 0.3s;
+		}
+
+		&.enabled {
+			background-color: #6f6;
+			box-shadow: inset 0px 0px 4px #040, inset 0px 0px 8px #040;
+			color: #030;
+
+			img {
+				filter: hue-rotate(-90deg) brightness(0.6);
+			}
+		}
+
+		&.disabled {
+			background-color: #f66;
+			box-shadow: inset 0px 0px 4px #400, inset 0px 0px 8px #400;
+			color: #030;
+
+			img {
+				filter: hue-rotate(140deg) brightness(0.6);
+			}
+		}
 	}
 }
 

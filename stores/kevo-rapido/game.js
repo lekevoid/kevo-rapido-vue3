@@ -1,0 +1,50 @@
+import { defineStore } from "pinia";
+
+export const useGameStore = defineStore("game", () => {
+	const allCategories = [
+		"animal",
+		"city",
+		"country",
+		"celebrity",
+		"profession",
+		"object",
+		"plant",
+		"food",
+		"name",
+		"movie",
+		"book",
+		"brand",
+		"event",
+		"fictional_character",
+		"game",
+		"houseware",
+		"location",
+		"mythology",
+		"adjective",
+		"song",
+		"verb",
+		"big",
+		"fast",
+		"hard",
+		"inside",
+		"noisy",
+		"outside",
+		"quiet",
+		"slow",
+		"small",
+		"soft",
+	];
+
+	const enabledCategories = ref(allCategories);
+
+	const colors = ["blue", "green", "orange"];
+
+	const lettersBase =
+		"AAAAAAAAAABBBBBBBBCCCCCCCDDDDDDDDEEEEEEEFFFFFFFFGGGGGHHHHHHHIIIIIJJJJJJJKKKKKLLLLLLLLLMMMMMMMMMMNNNNNNNNNNOOOOOOPPPPPPPPQQQRRRRRRRRRRSSSSSSSSSSTTTTTTTTTTTTUUUUVVVVVWWWWWWXXXYYYYZZZ";
+	const lettersCities =
+		"AAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDEEEEEEEFFFFFFFFGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHHHIIIIIIIIIIJJJJJJJJJJJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNNNOOOOOOOOOPPPPPPPPPPPPPPPPPPPPPPPQQQQRRRRRRRRRRRRRSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTTTTTTTTUUUUUVVVVVVVVVWWWWWWXXXYYYYYYYZZZZZZ";
+	const lettersCountries =
+		"AAAAAAAAAAABBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCDDDDDEEEEEEEEFFFGGGGGGGGGGGHHHHIIIIIIIIJJJKKKKKLLLLLLLLLMMMMMMMMMMMMMMMMMMNNNNNNNNNNNOPPPPPPPPPPQRRRSSSSSSSSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTUUUUUUUVVVYZZ";
+
+	return { allCategories, enabledCategories, colors, lettersBase, lettersCities, lettersCountries };
+});

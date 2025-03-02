@@ -17,56 +17,16 @@
 <script setup>
 import { storeToRefs } from "pinia";
 
+import { useGameStore } from "~/stores/kevo-rapido/game";
 import { usePlayersStore } from "~/stores/kevo-rapido/players";
 
 const { players } = storeToRefs(usePlayersStore());
+const { enabledCategories } = storeToRefs(useGameStore());
+const { colors, lettersBase, lettersCities, lettersCountries } = useGameStore();
 
 const newCardBtnEnabled = ref(true);
 const currentCard = ref({});
 const upcomingCard = ref({});
-
-const lettersBase =
-	"AAAAAAAAAABBBBBBBBCCCCCCCDDDDDDDDEEEEEEEFFFFFFFFGGGGGHHHHHHHIIIIIJJJJJJJKKKKKLLLLLLLLLMMMMMMMMMMNNNNNNNNNNOOOOOOPPPPPPPPQQQRRRRRRRRRRSSSSSSSSSSTTTTTTTTTTTTUUUUVVVVVWWWWWWXXXYYYYZZZ";
-const lettersCities =
-	"AAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDEEEEEEEFFFFFFFFGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHHHIIIIIIIIIIJJJJJJJJJJJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNNNOOOOOOOOOPPPPPPPPPPPPPPPPPPPPPPPQQQQRRRRRRRRRRRRRSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTTTTTTTTUUUUUVVVVVVVVVWWWWWWXXXYYYYYYYZZZZZZ";
-const lettersCountries =
-	"AAAAAAAAAAABBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCDDDDDEEEEEEEEFFFGGGGGGGGGGGHHHHIIIIIIIIJJJKKKKKLLLLLLLLLMMMMMMMMMMMMMMMMMMNNNNNNNNNNNOPPPPPPPPPPQRRRSSSSSSSSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTUUUUUUUVVVYZZ";
-
-const colors = ["blue", "green", "orange"];
-
-const icons = [
-	"animal",
-	"city",
-	"country",
-	"celebrity",
-	"profession",
-	"object",
-	"plant",
-	"food",
-	"name",
-	"movie",
-	"book",
-	"brand",
-	"event",
-	"fictional_character",
-	"game",
-	"houseware",
-	"location",
-	"mythology",
-	"adjective",
-	"song",
-	"verb",
-	"big",
-	"fast",
-	"hard",
-	"inside",
-	"noisy",
-	"outside",
-	"quiet",
-	"slow",
-	"small",
-	"soft",
-];
 
 function newCard() {
 	if (!newCardBtnEnabled.value) return;
@@ -77,7 +37,7 @@ function newCard() {
 	const color = colors[Math.floor(Math.random() * colors.length)];
 
 	// Choose category
-	const icon = icons[Math.floor(Math.random() * icons.length)];
+	const icon = enabledCategories.value[Math.floor(Math.random() * enabledCategories.value.length)];
 
 	// Choose letter
 	let compendium = lettersBase;
