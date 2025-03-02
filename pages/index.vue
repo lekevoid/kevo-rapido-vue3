@@ -112,8 +112,8 @@ watch(upcomingCard, (unfoldingCard) => {
 #kevo_rapido,
 .board {
 	pointer-events: all;
-	width: 100vw;
-	height: 100vh;
+	width: 100svw;
+	height: 100svh;
 	position: fixed;
 	top: 50%;
 	left: 50%;
@@ -151,14 +151,14 @@ watch(upcomingCard, (unfoldingCard) => {
 
 @media (orientation: portrait) {
 	#kevo_rapido {
-		width: 100vh;
-		height: 100vw;
+		width: 100svh;
+		height: 100svw;
 		transform: translate(-50%, -50%) rotate(90deg);
 	}
 
 	.board {
-		width: 100vh;
-		height: 100vw;
+		width: 100svh;
+		height: 100svw;
 	}
 }
 </style>
