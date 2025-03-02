@@ -3,13 +3,10 @@
 		<div class="scroll">
 			<div class="players">
 				<img :src="icon_players" alt="" />
-				<button :class="['btn_positive', { disabled: players.length >= 8 }]" :disabled="players.length >= 8" @click="addPlayer">+</button>
 				<button :class="['btn_negative', { disabled: players.length <= 2 }]" :disabled="players.length <= 2" @click="removeLastPlayer">&minus;</button>
+				<button :class="['btn_positive', { disabled: players.length >= 8 }]" :disabled="players.length >= 8" @click="addPlayer">+</button>
 			</div>
-			<div class="players_rotates">
-				<h2>Players' positions</h2>
-				<input v-for="player in players" type="range" min="0" max="360" step="2" v-model="player.rotateBoard" />
-			</div>
+			<hr />
 			<div class="choose_categories">
 				<div class="row">
 					<button class="multiple_categories" @click="toggleCategories('all')">All</button>
@@ -24,6 +21,11 @@
 					:key="category">
 					<img :src="`/img/${category}_blue.png`" />
 				</button>
+			</div>
+			<hr />
+			<div class="players_rotates">
+				<h2>Players' positions</h2>
+				<input v-for="player in players" type="range" min="0" max="360" step="2" v-model="player.rotateBoard" />
 			</div>
 		</div>
 		<div class="open_btn" @click="open = !open">
@@ -75,13 +77,23 @@ const open = ref(false);
 		border-style: solid;
 		width: 0px;
 		display: block;
+		transition: transform 0.6s ease;
+	}
+
+	hr {
+		margin: 40px 0;
+		opacity: 0.4;
 	}
 
 	&.open {
 		transform: translateX(0%);
 
 		.arrow {
-			transform: rotate(180deg);
+			transform: rotate(180deg) translateX(20%);
+		}
+
+		.open_btn {
+			width: 50px;
 		}
 	}
 }
@@ -232,5 +244,6 @@ button {
 	align-items: center;
 	justify-content: center;
 	border-radius: 0 12px 12px 0;
+	transition: width 0.6s ease;
 }
 </style>
