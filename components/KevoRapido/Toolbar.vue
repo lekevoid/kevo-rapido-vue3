@@ -6,7 +6,7 @@
 		</div>
 		<div class="players_rotates">
 			<h2>Players' positions</h2>
-			<input v-for="player in players" type="range" min="0" max="360" step="5" v-model="player.rotateBoard" />
+			<input v-for="player in players" type="range" min="0" max="360" step="2" v-model="player.rotateBoard" />
 		</div>
 		<div class="open_btn" @click="open = !open">
 			<span class="arrow"></span>
@@ -20,7 +20,7 @@ import { usePlayersStore } from "~/stores/kevo-rapido/players";
 import icon_players from "~/img/icon_players.png";
 
 const { players } = storeToRefs(usePlayersStore());
-const { addPlayer, removePlayer } = usePlayersStore();
+const { addPlayer } = usePlayersStore();
 
 const open = ref(false);
 </script>
@@ -73,7 +73,7 @@ const open = ref(false);
 	margin-bottom: 20px;
 
 	input {
-		margin: 0 0 10px;
+		margin: 20px 0;
 		width: 100%;
 	}
 }

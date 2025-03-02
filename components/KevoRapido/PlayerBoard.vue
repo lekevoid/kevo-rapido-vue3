@@ -1,12 +1,13 @@
 <template>
-	<div class="PlayerBoard" ref="playerBoardRef" :style="`--rotate:${player.rotateBoard}deg`" v-if="player">
+	<div class="PlayerBoard" ref="playerBoardRef" :style="`--rotate:${parseInt(player.rotateBoard) + 90}deg`" v-if="player">
 		<div class="scoreboard" v-if="!editMode">
 			<button @click="adjustScore(-1)">&minus;</button>
 			<div class="score">{{ player.score }}</div>
 			<button @click="adjustScore(1)">&plus;</button>
 		</div>
-		<div v-else>
-			<button @click="editMode = false">Reset</button>
+		<div v-else class="edit_player">
+			<button class="cancel" @click="editMode = false">Cancel</button>
+			<button class="delete" @click="removePlayer(playerId)">Remove</button>
 		</div>
 	</div>
 </template>
@@ -17,6 +18,7 @@ import { storeToRefs } from "pinia";
 import { usePlayersStore } from "~/stores/kevo-rapido/players";
 
 const { players } = storeToRefs(usePlayersStore());
+const { removePlayer } = usePlayersStore();
 
 const { playerId } = defineProps({ playerId: { type: Number, required: true } });
 
@@ -86,7 +88,32 @@ onLongPress(playerBoardRef, handleOnLongPress, {
 	}
 }
 
-pre {
-	margin: 0;
+.edit_player {
+	width: 100%;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-between;
+	align-items: center;
+	user-select: none;
+
+	button {
+		appearance: none;
+		border: 0 none;
+		border-radius: 4px;
+		height: 30px;
+		font-size: 12px;
+
+		&.cancel {
+			background-color: #aa0;
+			box-shadow: inset 0px 0px 8px #880, inset 0px 0px 4px #880;
+			color: #110;
+		}
+
+		&.delete {
+			box-shadow: inset 0px 0px 8px #800, inset 0px 0px 4px #800;
+			background-color: #a00;
+			color: #200;
+		}
+	}
 }
 </style>

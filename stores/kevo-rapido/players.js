@@ -11,6 +11,19 @@ export const usePlayersStore = defineStore("players", () => {
 		return Math.round(Math.random() * parseInt(now));
 	}
 
+	const players = ref([
+		{
+			...blankPlayer,
+			rotateBoard: 90,
+			id: playerId(),
+		},
+		{
+			...blankPlayer,
+			rotateBoard: 270,
+			id: playerId(),
+		},
+	]);
+
 	function deepClone(obj) {
 		if (typeof obj !== "object" || obj === null) {
 			return obj;
@@ -56,19 +69,6 @@ export const usePlayersStore = defineStore("players", () => {
 		return farthestNumber;
 	}
 
-	const players = ref([
-		{
-			...blankPlayer,
-			rotateBoard: 0,
-			id: playerId(),
-		},
-		{
-			...blankPlayer,
-			rotateBoard: 180,
-			id: playerId(),
-		},
-	]);
-
 	function addPlayer() {
 		if (players.value.length >= 8) return;
 		const farthestEmptyPosition = findFarthestEmptyPosition();
@@ -77,8 +77,14 @@ export const usePlayersStore = defineStore("players", () => {
 		console.log(players.value);
 	}
 
+	function removePlayer(playerId) {
+		console.log(playerId);
+		players.value = players.value.filter((p) => p.id !== playerId);
+	}
+
 	return {
 		players,
 		addPlayer,
+		removePlayer,
 	};
 });

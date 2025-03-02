@@ -118,7 +118,7 @@ watch(upcomingCard, (unfoldingCard) => {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	background: linear-gradient(to right bottom, #f00 0%, #88f 100%);
+	background: linear-gradient(to right bottom, #adf 0%, #88f 100%);
 }
 
 .board {
