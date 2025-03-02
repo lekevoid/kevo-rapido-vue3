@@ -108,33 +108,6 @@ watch(upcomingCard, (unfoldingCard) => {
 });
 </script>
 
-<style lang="scss">
-html {
-	pointer-events: none;
-	overscroll-behavior: none;
-	overflow: hidden;
-}
-
-body {
-	pointer-events: none;
-	overscroll-behavior: none;
-	-webkit-overflow-scrolling: touch;
-	overflow: hidden;
-	margin: 0;
-	padding: 0;
-	font-family: Roboto;
-}
-
-div {
-	display: block;
-}
-
-* {
-	position: relative;
-	box-sizing: border-box;
-}
-</style>
-
 <style lang="scss" scoped>
 #kevo_rapido,
 .board {
