@@ -110,9 +110,11 @@ watch(upcomingCard, (unfoldingCard) => {
 
 <style lang="scss">
 html {
+	pointer-events: none;
 }
 
 body {
+	pointer-events: none;
 	margin: 0;
 	padding: 0;
 	font-family: arial;
@@ -131,6 +133,7 @@ div {
 <style lang="scss" scoped>
 #kevo_rapido,
 .board {
+	pointer-events: all;
 	width: 100%;
 	height: 100%;
 	position: fixed;
