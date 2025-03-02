@@ -56,6 +56,16 @@ const icons = [
 	"adjective",
 	"song",
 	"verb",
+	"big",
+	"fast",
+	"hard",
+	"inside",
+	"noisy",
+	"outside",
+	"quiet",
+	"slow",
+	"small",
+	"soft",
 ];
 
 function newCard() {
@@ -96,10 +106,6 @@ watch(upcomingCard, (unfoldingCard) => {
 		newCardBtnEnabled.value = true;
 	}, 1200);
 });
-
-watch(currentCard, (newVal) => {
-	console.log(newVal);
-});
 </script>
 
 <style lang="scss">
@@ -134,13 +140,11 @@ div {
 }
 
 .board {
-	border: 1px solid red;
 	display: flex;
 	flex-flow: row nowrap;
 }
 
 .zone_flipped_down {
-	border: 1px solid blue;
 	flex: 0 0 20%;
 	display: flex;
 	flex-flow: row nowrap;
@@ -153,7 +157,6 @@ div {
 }
 
 .zone_flipped_up {
-	border: 1px solid green;
 	flex: 0 0 80%;
 	display: flex;
 	flex-flow: row nowrap;

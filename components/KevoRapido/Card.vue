@@ -34,8 +34,8 @@ const { color, icon, letter, rotate } = card;
 		transform: translateX(-0%) translateY(-50%) translateZ(200px) rotate3d(-2, 1, 0, -180deg);
 	}
 
-	80% {
-		left: 38%;
+	70% {
+		left: 28%;
 		transform: translateX(-30%) translateY(-50%) translateZ(60px) rotate3d(-2, 1, 0, -0deg);
 	}
 
@@ -104,9 +104,8 @@ const { color, icon, letter, rotate } = card;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	flex: 0 0 50%;
-	max-width: 50%;
-	/* border: 1px solid purple; */
+	flex: 0 0 60%;
+	max-width: 60%;
 	aspect-ratio: 1;
 	object-fit: contain;
 	object-position: center;
@@ -116,9 +115,10 @@ const { color, icon, letter, rotate } = card;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	max-width: 50%;
-	flex: 0 0 50%;
-	font-size: 0.3em;
+	max-width: 40%;
+	flex: 0 0 40%;
+	padding-left: 10%;
+	font-size: 0.25em;
 	font-family: arial black, arial;
 	fonmt-weigth: 900;
 	/* border: 1px solid purple; */

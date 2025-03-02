@@ -23,7 +23,7 @@ import icon_players from "~/img/icon_players.png";
 const { players } = storeToRefs(usePlayersStore());
 const { addPlayer, removePlayer } = usePlayersStore();
 
-const open = ref(true);
+const open = ref(false);
 </script>
 
 <style lang="scss" scoped>
