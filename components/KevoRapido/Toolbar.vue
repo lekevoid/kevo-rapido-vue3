@@ -25,8 +25,7 @@
 					<img :src="`/img/animal_blue.png`" /> / <img :src="`/img/name_blue.png`" />
 				</button>
 				<button
-					:class="['single_category', permissiveComboCategories ? 'enabled' : 'disabled']"
-					style="font-size: 10px; font-weight: bold"
+					:class="['permissive', permissiveComboCategories ? 'enabled' : 'disabled']"
 					@click="permissiveComboCategories = !permissiveComboCategories">
 					Permissive
 				</button>
@@ -185,9 +184,19 @@ function resetGame() {
 		}
 
 		&.combo_category {
-			width: calc(70% + 60px);
-			font-size: 1.4em;
+			width: calc(50% + 40px);
+			font-size: 1.8em;
 			line-height: 0.5em;
+			display: inline-flex;
+			align-items: center;
+			gap: 4px;
+			justify-content: center;
+		}
+
+		&.permissive {
+			width: calc(30% + 20px);
+			font-size: 14px;
+			font-weight: bold;
 		}
 
 		&.enabled {
