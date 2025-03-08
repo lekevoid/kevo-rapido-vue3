@@ -131,7 +131,7 @@ const icons = computed(() => {
 	&.combo {
 		.icon {
 			max-width: 60%;
-			max-height: 70%;
+			max-height: 60%;
 			transform: none;
 		}
 
