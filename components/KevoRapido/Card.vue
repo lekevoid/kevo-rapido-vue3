@@ -113,6 +113,7 @@ const icons = computed(() => {
 	aspect-ratio: 1;
 
 	.icon {
+		max-height: 100%;
 		object-fit: contain;
 		object-position: center;
 		position: absolute;
@@ -130,6 +131,7 @@ const icons = computed(() => {
 	&.combo {
 		.icon {
 			max-width: 60%;
+			max-height: 70%;
 			transform: none;
 		}
 
