@@ -36,6 +36,14 @@
 				<h2>Players' positions</h2>
 				<input v-for="player in players" type="range" min="0" max="360" step="2" v-model="player.rotateBoard" />
 			</div>
+			<hr />
+			<div class="reset_game">
+				<div class="col"><h2>Reset game</h2></div>
+				<div class="col">
+					<button v-if="!confirmReset" class="btn_negative reset" @click="confirmReset = true">Reset</button>
+					<button v-if="confirmReset" class="btn_negative reset" @click="resetGame">Sure ?</button>
+				</div>
+			</div>
 		</div>
 		<div class="open_btn" @click="open = !open">
 			<span class="arrow"></span>
@@ -57,6 +65,12 @@ const { allCategories, toggleCategory, toggleCategories } = useGameStore();
 const { enableComboCategories, permissiveComboCategories, enabledSingleCategories } = storeToRefs(useGameStore());
 
 const open = ref(false);
+
+const confirmReset = ref(false);
+
+function resetGame() {
+	window.location.reload();
+}
 </script>
 
 <style lang="scss" scoped>
@@ -241,9 +255,32 @@ button {
 		transition: opacity 0.3s;
 		color: #300;
 
+		&.reset {
+			font-size: 12px;
+			width: auto;
+			padding: 0 20px;
+		}
+
 		&.disabled {
 			opacity: 0.2;
 		}
+	}
+}
+
+.reset_game {
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+
+	.col {
+		padding: 0 10px;
+		display: flex;
+		flex-flow: row nowrap;
+		align-items: center;
+	}
+
+	h2 {
+		margin: 0;
 	}
 }
 
