@@ -16,10 +16,19 @@
 				</div>
 				<button
 					v-for="category in allCategories"
-					:class="['single_category', enabledCategories.includes(category) ? 'enabled' : 'disabled']"
+					:class="['single_category', enabledSingleCategories.includes(category) ? 'enabled' : 'disabled']"
 					@click="toggleCategory(category)"
 					:key="category">
 					<img :src="`/img/${category}_blue.png`" />
+				</button>
+				<button :class="['combo_category', enableComboCategories ? 'enabled' : 'disabled']" @click="enableComboCategories = !enableComboCategories">
+					<img :src="`/img/animal_blue.png`" /> / <img :src="`/img/name_blue.png`" />
+				</button>
+				<button
+					:class="['single_category', permissiveComboCategories ? 'enabled' : 'disabled']"
+					style="font-size: 10px; font-weight: bold"
+					@click="permissiveComboCategories = !permissiveComboCategories">
+					Permissive
 				</button>
 			</div>
 			<hr />
@@ -45,7 +54,7 @@ import icon_players from "~/img/icon_players.png";
 const { players } = storeToRefs(usePlayersStore());
 const { addPlayer, removeLastPlayer } = usePlayersStore();
 const { allCategories, toggleCategory, toggleCategories } = useGameStore();
-const { enabledCategories } = storeToRefs(useGameStore());
+const { enableComboCategories, permissiveComboCategories, enabledSingleCategories } = storeToRefs(useGameStore());
 
 const open = ref(false);
 </script>
@@ -159,6 +168,12 @@ const open = ref(false);
 
 		&.single_category {
 			width: 10%;
+		}
+
+		&.combo_category {
+			width: calc(70% + 60px);
+			font-size: 1.4em;
+			line-height: 0.5em;
 		}
 
 		&.enabled {

@@ -1,45 +1,149 @@
 import { defineStore } from "pinia";
 
 export const useGameStore = defineStore("game", () => {
-	const allCategories = [
-		"animal",
-		"city",
-		"country",
-		"celebrity",
-		"profession",
-		"object",
-		"plant",
-		"food",
-		"name",
-		"movie",
-		"book",
-		"brand",
-		"event",
-		"fictional_character",
-		"game",
-		"houseware",
-		"location",
-		"mythology",
-		"adjective",
-		"song",
-		"verb",
-		"big",
-		"fast",
-		"hard",
-		"inside",
-		"noisy",
-		"outside",
-		"quiet",
-		"slow",
-		"small",
-		"soft",
-	];
-
-	const originalCategories = ["animal", "city", "country", "celebrity", "profession", "object", "plant", "food", "name", "movie", "book"];
-	const kevCategories = ["brand", "event", "fictional_character", "game", "houseware", "location", "mythology", "adjective", "song", "verb"];
+	const originalCategories = ["animal", "book", "city", "country", "celebrity", "profession", "object", "plant", "food", "name", "movie"];
+	const kevCategories = ["adjective", "brand", "event", "fictional", "game", "houseware", "location", "song", "verb"];
 	const twistCategories = ["big", "fast", "hard", "inside", "noisy", "outside", "quiet", "slow", "small", "soft"];
 
-	const enabledCategories = ref(allCategories);
+	const allCategories = [...originalCategories, ...kevCategories, ...twistCategories];
+
+	const comboCategories = [
+		["animal", "big"],
+		["animal", "brand"],
+		["animal", "fast"],
+		["animal", "fictional"],
+		["animal", "hard"],
+		["animal", "inside"],
+		["animal", "name"],
+		["animal", "noisy"],
+		["animal", "profession"],
+		["animal", "quiet"],
+		["animal", "slow"],
+		["animal", "small"],
+		["animal", "soft"],
+		["big", "city"],
+		["big", "country"],
+		["big", "fast"],
+		["big", "fictional"],
+		["big", "hard"],
+		["big", "movie"],
+		["big", "name"],
+		["big", "noisy"],
+		["big", "object"],
+		["big", "outside"],
+		["big", "plant"],
+		["big", "quiet"],
+		["big", "slow"],
+		["book", "fictional"],
+		["book", "game"],
+		["book", "movie"],
+		["brand", "food"],
+		["brand", "inside"],
+		["brand", "object"],
+		["celebrity", "movie"],
+		["celebrity", "song"],
+		["city", "fictional"],
+		["city", "name"],
+		["city", "small"],
+		["fast", "hard"],
+		["fast", "noisy"],
+		["fast", "quiet"],
+		["fast", "small"],
+		["fictional", "movie"],
+		["fictional", "object"],
+		["fictional", "plant"],
+		["fictional", "small"],
+		["food", "hard"],
+		["food", "noisy"],
+		["food", "plant"],
+		["food", "small"],
+		["food", "soft"],
+		["game", "movie"],
+		["hard", "houseware"],
+		["hard", "inside"],
+		["hard", "name"],
+		["hard", "noisy"],
+		["hard", "outside"],
+		["hard", "small"],
+		["houseware", "movie"],
+		["houseware", "noisy"],
+		["houseware", "outside"],
+		["houseware", "quiet"],
+		["houseware", "slow"],
+		["houseware", "small"],
+		["houseware", "soft"],
+		["inside", "noisy"],
+		["inside", "outside"],
+		["inside", "plant"],
+		["inside", "profession"],
+		["inside", "quiet"],
+		["inside", "slow"],
+		["inside", "small"],
+		["inside", "soft"],
+		["location", "fictional"],
+		["location", "movie"],
+		["location", "name"],
+		["movie", "fictional"],
+		["name", "object"],
+		["name", "plant"],
+		["noisy", "outside"],
+		["noisy", "slow"],
+		["noisy", "small"],
+		["object", "outside"],
+		["object", "quiet"],
+		["object", "slow"],
+		["object", "small"],
+		["object", "soft"],
+		["outside", "profession"],
+		["outside", "quiet"],
+		["outside", "slow"],
+		["outside", "small"],
+		["outside", "soft"],
+		["plant", "profession"],
+		["plant", "small"],
+		["plant", "soft"],
+		["quiet", "slow"],
+		["quiet", "small"],
+		["slow", "small"],
+	];
+
+	const enableComboCategories = ref(true);
+	const permissiveComboCategories = ref(true);
+
+	const enabledSingleCategories = ref(allCategories);
+
+	const enabledCategories = computed(() => {
+		let out = [...enabledSingleCategories.value];
+
+		if (enableComboCategories.value) {
+			for (const combo of comboCategories) {
+				let addComboCategoryToList = false;
+				if (permissiveComboCategories.value) {
+					// Permissive mode for Combo Categories
+					for (const categoryFromCombo of combo) {
+						if (enabledSingleCategories.value.includes(categoryFromCombo)) {
+							addComboCategoryToList = true;
+						}
+					}
+				} else {
+					// Restrictive mode for Combo Categories
+					for (const categoryFromCombo of combo) {
+						if (!enabledSingleCategories.value.includes(categoryFromCombo)) {
+							addComboCategoryToList = false;
+						}
+					}
+				}
+
+				if (addComboCategoryToList) {
+					out.push(combo);
+				}
+			}
+		}
+
+		return out;
+	});
+
+	console.log(enabledCategories.value);
 
 	const colors = ["blue", "green", "orange"];
 
@@ -128,20 +232,31 @@ export const useGameStore = defineStore("game", () => {
 		"ZZ",
 	].join("");
 
-	console.log(lettersCountries);
+	/* const _comboCategories = {};
+	console.log("hello");
+	for (let i of allCategories.sort()) {
+		for (let j of allCategories.sort()) {
+			if (i !== j) {
+				const index = [i, j].sort().join("");
+				console.log(index);
+				_comboCategories[index] = [i, j].sort();
+			}
+		}
+	}
+	console.log(Object.values(_comboCategories)); */
 
 	function toggleCategory(c) {
-		const index = enabledCategories.value.indexOf(c);
+		const index = enabledSingleCategories.value.indexOf(c);
 		if (index > -1) {
-			enabledCategories.value.splice(index, 1);
+			enabledSingleCategories.value.splice(index, 1);
 		} else {
-			enabledCategories.value.push(c);
+			enabledSingleCategories.value.push(c);
 		}
 	}
 
 	function toggleCategories(theme) {
 		if (theme === "all") {
-			enabledCategories.value = [...allCategories];
+			enabledSingleCategories.value = [...allCategories];
 			return;
 		}
 
@@ -156,5 +271,17 @@ export const useGameStore = defineStore("game", () => {
 		}
 	}
 
-	return { allCategories, enabledCategories, colors, lettersBase, lettersCities, lettersCountries, toggleCategory, toggleCategories };
+	return {
+		allCategories,
+		enableComboCategories,
+		permissiveComboCategories,
+		enabledSingleCategories,
+		enabledCategories,
+		colors,
+		lettersBase,
+		lettersCities,
+		lettersCountries,
+		toggleCategory,
+		toggleCategories,
+	};
 });

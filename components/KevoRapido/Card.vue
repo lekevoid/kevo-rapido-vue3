@@ -4,7 +4,9 @@
 			<img :src="`/img/back.png`" alt="" />
 		</div>
 		<div class="front" :style="`--random-rotate:${rotate}deg;`">
-			<img class="icon" :src="`/img/${icon}_${color}.png`" alt="" />
+			<div :class="['icons_wrapper', { combo: Array.isArray(category) }]">
+				<img v-for="icon in icons" class="icon" :src="`/img/${icon}_${color}.png`" alt="" />
+			</div>
 			<div class="letter">
 				{{ letter }}
 			</div>
@@ -17,7 +19,12 @@ const { card } = defineProps({
 	card: { type: Object, required: true },
 });
 
-const { color, icon, letter, rotate } = card;
+const { color, category, letter, rotate } = card;
+
+const icons = computed(() => {
+	if (Array.isArray(category)) return category;
+	return [category];
+});
 </script>
 
 <style lang="scss" scoped>
@@ -98,15 +105,45 @@ const { color, icon, letter, rotate } = card;
 	transform: rotate(var(--random-rotate));
 }
 
-.icon {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.icons_wrapper {
 	flex: 0 0 60%;
 	max-width: 60%;
+	position: relative;
+	max-height: 100%;
 	aspect-ratio: 1;
-	object-fit: contain;
-	object-position: center;
+
+	.icon {
+		object-fit: contain;
+		object-position: center;
+		position: absolute;
+	}
+
+	&:not(.combo) {
+		.icon {
+			max-width: 100%;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	&.combo {
+		.icon {
+			max-width: 60%;
+			transform: none;
+		}
+
+		.icon:first-child {
+			left: 0;
+			top: 0;
+		}
+
+		.icon:last-child {
+			right: 0;
+			bottom: 0;
+			transform: none;
+		}
+	}
 }
 
 .letter {

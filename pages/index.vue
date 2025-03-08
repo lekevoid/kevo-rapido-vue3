@@ -10,6 +10,9 @@
 				<KevoRapidoCard v-if="currentCard?.letter" class="current_card" :card="currentCard" :key="currentCard.id" />
 				<KevoRapidoPlayerBoard v-for="player in players" :player-id="player.id" :key="player.id" />
 			</div>
+			<!-- <pre class="console">
+				{{ enabledCategories }}
+			</pre> -->
 		</div>
 	</div>
 </template>
@@ -37,22 +40,22 @@ function newCard() {
 	const color = colors[Math.floor(Math.random() * colors.length)];
 
 	// Choose category
-	const icon = enabledCategories.value[Math.floor(Math.random() * enabledCategories.value.length)];
+	const category = enabledCategories.value[Math.floor(Math.random() * enabledCategories.value.length)];
 
 	// Choose letter
 	let compendium = lettersBase;
-	if (icon === "country") compendium = lettersCountries;
-	if (icon === "city") compendium = lettersCities;
+	if (category === "country") compendium = lettersCountries;
+	if (category === "city") compendium = lettersCities;
 	const letter = compendium[Math.floor(Math.random() * compendium.length)];
 
 	const card = {
 		color,
-		icon,
+		category,
 		letter,
 		rotate: Math.round(Math.random() * 360),
 	};
 
-	card.id = `${card.color}-${card.icon}-${card.letter}-${card.rotate}`;
+	card.id = `${card.color}-${card.category}-${card.letter}-${card.rotate}`;
 
 	upcomingCard.value = card;
 }
@@ -69,6 +72,17 @@ watch(upcomingCard, (unfoldingCard) => {
 </script>
 
 <style lang="scss" scoped>
+/* .console {
+	background: #000;
+	color: #0f0;
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 100vh;
+	width: 300px;
+	overflow-y: scroll;
+} */
+
 #kevo_rapido,
 .board {
 	pointer-events: all;
